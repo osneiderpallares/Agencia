@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="AGENCIAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="AGENCIAModels.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Alojamiento">
           <Key>
             <PropertyRef Name="id" />
@@ -28,6 +28,13 @@
           <Property Name="telefono" Type="varchar" MaxLength="250" />
         </EntityType>
         <EntityType Name="Estados">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Generos">
           <Key>
             <PropertyRef Name="id" />
           </Key>
@@ -74,6 +81,13 @@
           <Property Name="fecha" Type="datetime" />
           <Property Name="estado" Type="int" />
         </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="150" />
+        </EntityType>
         <EntityType Name="tiposDocumentos">
           <Key>
             <PropertyRef Name="id" />
@@ -92,7 +106,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nombre" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Usuarios">
@@ -105,11 +119,13 @@
           <Property Name="nombres" Type="varchar" MaxLength="200" />
           <Property Name="apellidos" Type="varchar" MaxLength="200" />
           <Property Name="email" Type="varchar" MaxLength="250" />
-          <Property Name="genero" Type="varchar" MaxLength="50" />
+          <Property Name="genero" Type="int" />
           <Property Name="telefono" Type="varchar" MaxLength="50" />
           <Property Name="fechaNacimiento" Type="date" />
           <Property Name="nombreUsuario" Type="varchar" MaxLength="250" />
           <Property Name="clave" Type="varchar" MaxLength="350" />
+          <Property Name="rol" Type="int" />
+          <Property Name="estado" Type="int" />
         </EntityType>
         <Association Name="FK_Alojamiento_Habitaciones">
           <End Role="Habitaciones" Type="Self.Habitaciones" Multiplicity="0..1" />
@@ -207,6 +223,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Estados_Usuarios">
+          <End Role="Estados" Type="Self.Estados" Multiplicity="0..1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estados">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="estado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Generos_Usuarios">
+          <End Role="Generos" Type="Self.Generos" Multiplicity="0..1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Generos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="genero" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Hoteles_Habitaciones">
           <End Role="Hoteles" Type="Self.Hoteles" Multiplicity="0..1" />
           <End Role="Habitaciones" Type="Self.Habitaciones" Multiplicity="*" />
@@ -216,6 +256,18 @@
             </Principal>
             <Dependent Role="Habitaciones">
               <PropertyRef Name="hotel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Roles_Usuarios">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="rol" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -255,13 +307,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="AGENCIAModelStoreContainer">
+        <EntityContainer Name="AGENCIAModelsStoreContainer">
           <EntitySet Name="Alojamiento" EntityType="Self.Alojamiento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="contactoEmergencia" EntityType="Self.contactoEmergencia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Estados" EntityType="Self.Estados" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Generos" EntityType="Self.Generos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Habitaciones" EntityType="Self.Habitaciones" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Hoteles" EntityType="Self.Hoteles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Reservas" EntityType="Self.Reservas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tiposDocumentos" EntityType="Self.tiposDocumentos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tiposHabitaciones" EntityType="Self.tiposHabitaciones" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ubicacion" EntityType="Self.Ubicacion" Schema="dbo" store:Type="Tables" />
@@ -298,9 +352,21 @@
             <End Role="Estados" EntitySet="Estados" />
             <End Role="Reservas" EntitySet="Reservas" />
           </AssociationSet>
+          <AssociationSet Name="FK_Estados_Usuarios" Association="Self.FK_Estados_Usuarios">
+            <End Role="Estados" EntitySet="Estados" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Generos_Usuarios" Association="Self.FK_Generos_Usuarios">
+            <End Role="Generos" EntitySet="Generos" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
           <AssociationSet Name="FK_Hoteles_Habitaciones" Association="Self.FK_Hoteles_Habitaciones">
             <End Role="Hoteles" EntitySet="Hoteles" />
             <End Role="Habitaciones" EntitySet="Habitaciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Roles_Usuarios" Association="Self.FK_Roles_Usuarios">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
           </AssociationSet>
           <AssociationSet Name="FK_tipoHabitaciones_Habitaciones" Association="Self.FK_tipoHabitaciones_Habitaciones">
             <End Role="tiposHabitaciones" EntitySet="tiposHabitaciones" />
@@ -319,7 +385,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="AGENCIAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="AGENCIAModels" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Alojamiento">
           <Key>
             <PropertyRef Name="id" />
@@ -356,6 +422,15 @@
           <NavigationProperty Name="Habitaciones" Relationship="Self.FK_Estados_Habitaciones" FromRole="Estados" ToRole="Habitaciones" />
           <NavigationProperty Name="Hoteles" Relationship="Self.FK_Estados_Hoteles" FromRole="Estados" ToRole="Hoteles" />
           <NavigationProperty Name="Reservas" Relationship="Self.FK_Estados_Reservas" FromRole="Estados" ToRole="Reservas" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK_Estados_Usuarios" FromRole="Estados" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="Generos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK_Generos_Usuarios" FromRole="Generos" ToRole="Usuarios" />
         </EntityType>
         <EntityType Name="Habitaciones">
           <Key>
@@ -408,6 +483,14 @@
           <NavigationProperty Name="contactoEmergencia1" Relationship="Self.FK_ContactoEmergencia_Reservas" FromRole="Reservas" ToRole="contactoEmergencia" />
           <NavigationProperty Name="Estados" Relationship="Self.FK_Estados_Reservas" FromRole="Reservas" ToRole="Estados" />
         </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK_Roles_Usuarios" FromRole="Roles" ToRole="Usuarios" />
+        </EntityType>
         <EntityType Name="tiposDocumentos">
           <Key>
             <PropertyRef Name="id" />
@@ -428,7 +511,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Habitaciones" Relationship="Self.FK_Ubicacion_Habitaciones" FromRole="Ubicacion" ToRole="Habitaciones" />
         </EntityType>
@@ -442,12 +525,17 @@
           <Property Name="nombres" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="apellidos" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="email" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="genero" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="genero" Type="Int32" />
           <Property Name="telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="fechaNacimiento" Type="DateTime" Precision="0" />
           <Property Name="nombreUsuario" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="clave" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
+          <Property Name="rol" Type="Int32" />
+          <Property Name="estado" Type="Int32" />
           <NavigationProperty Name="Alojamiento" Relationship="Self.FK_Alojamiento_Usuarios" FromRole="Usuarios" ToRole="Alojamiento" />
+          <NavigationProperty Name="Estados" Relationship="Self.FK_Estados_Usuarios" FromRole="Usuarios" ToRole="Estados" />
+          <NavigationProperty Name="Generos" Relationship="Self.FK_Generos_Usuarios" FromRole="Usuarios" ToRole="Generos" />
+          <NavigationProperty Name="Roles" Relationship="Self.FK_Roles_Usuarios" FromRole="Usuarios" ToRole="Roles" />
           <NavigationProperty Name="tiposDocumentos" Relationship="Self.FK_tiposDocumentos_Usuarios" FromRole="Usuarios" ToRole="tiposDocumentos" />
         </EntityType>
         <Association Name="FK_Alojamiento_Habitaciones">
@@ -546,6 +634,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Estados_Usuarios">
+          <End Role="Estados" Type="Self.Estados" Multiplicity="0..1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estados">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="estado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Generos_Usuarios">
+          <End Role="Generos" Type="Self.Generos" Multiplicity="0..1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Generos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="genero" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Hoteles_Habitaciones">
           <End Role="Hoteles" Type="Self.Hoteles" Multiplicity="0..1" />
           <End Role="Habitaciones" Type="Self.Habitaciones" Multiplicity="*" />
@@ -582,6 +694,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Roles_Usuarios">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="rol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tiposDocumentos_Usuarios">
           <End Role="tiposDocumentos" Type="Self.tiposDocumentos" Multiplicity="0..1" />
           <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
@@ -594,13 +718,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="AGENCIAModels" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="AGENCIAModel" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Alojamiento" EntityType="Self.Alojamiento" />
           <EntitySet Name="contactoEmergencia" EntityType="Self.contactoEmergencia" />
           <EntitySet Name="Estados" EntityType="Self.Estados" />
+          <EntitySet Name="Generos" EntityType="Self.Generos" />
           <EntitySet Name="Habitaciones" EntityType="Self.Habitaciones" />
           <EntitySet Name="Hoteles" EntityType="Self.Hoteles" />
           <EntitySet Name="Reservas" EntityType="Self.Reservas" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" />
           <EntitySet Name="tiposDocumentos" EntityType="Self.tiposDocumentos" />
           <EntitySet Name="tiposHabitaciones" EntityType="Self.tiposHabitaciones" />
           <EntitySet Name="Ubicacion" EntityType="Self.Ubicacion" />
@@ -637,6 +763,14 @@
             <End Role="Estados" EntitySet="Estados" />
             <End Role="Reservas" EntitySet="Reservas" />
           </AssociationSet>
+          <AssociationSet Name="FK_Estados_Usuarios" Association="Self.FK_Estados_Usuarios">
+            <End Role="Estados" EntitySet="Estados" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Generos_Usuarios" Association="Self.FK_Generos_Usuarios">
+            <End Role="Generos" EntitySet="Generos" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
           <AssociationSet Name="FK_Hoteles_Habitaciones" Association="Self.FK_Hoteles_Habitaciones">
             <End Role="Hoteles" EntitySet="Hoteles" />
             <End Role="Habitaciones" EntitySet="Habitaciones" />
@@ -649,6 +783,10 @@
             <End Role="Ubicacion" EntitySet="Ubicacion" />
             <End Role="Habitaciones" EntitySet="Habitaciones" />
           </AssociationSet>
+          <AssociationSet Name="FK_Roles_Usuarios" Association="Self.FK_Roles_Usuarios">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
           <AssociationSet Name="FK_tiposDocumentos_Usuarios" Association="Self.FK_tiposDocumentos_Usuarios">
             <End Role="tiposDocumentos" EntitySet="tiposDocumentos" />
             <End Role="Usuarios" EntitySet="Usuarios" />
@@ -659,9 +797,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="AGENCIAModelStoreContainer" CdmEntityContainer="AGENCIAModels">
+        <EntityContainerMapping StorageEntityContainer="AGENCIAModelsStoreContainer" CdmEntityContainer="AGENCIAModel">
           <EntitySetMapping Name="Alojamiento">
-            <EntityTypeMapping TypeName="AGENCIAModel.Alojamiento">
+            <EntityTypeMapping TypeName="AGENCIAModels.Alojamiento">
               <MappingFragment StoreEntitySet="Alojamiento">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="usuario" ColumnName="usuario" />
@@ -675,7 +813,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="contactoEmergencia">
-            <EntityTypeMapping TypeName="AGENCIAModel.contactoEmergencia">
+            <EntityTypeMapping TypeName="AGENCIAModels.contactoEmergencia">
               <MappingFragment StoreEntitySet="contactoEmergencia">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nombres" ColumnName="nombres" />
@@ -685,15 +823,23 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Estados">
-            <EntityTypeMapping TypeName="AGENCIAModel.Estados">
+            <EntityTypeMapping TypeName="AGENCIAModels.Estados">
               <MappingFragment StoreEntitySet="Estados">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Generos">
+            <EntityTypeMapping TypeName="AGENCIAModels.Generos">
+              <MappingFragment StoreEntitySet="Generos">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Habitaciones">
-            <EntityTypeMapping TypeName="AGENCIAModel.Habitaciones">
+            <EntityTypeMapping TypeName="AGENCIAModels.Habitaciones">
               <MappingFragment StoreEntitySet="Habitaciones">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="hotel" ColumnName="hotel" />
@@ -711,7 +857,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Hoteles">
-            <EntityTypeMapping TypeName="AGENCIAModel.Hoteles">
+            <EntityTypeMapping TypeName="AGENCIAModels.Hoteles">
               <MappingFragment StoreEntitySet="Hoteles">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -725,7 +871,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Reservas">
-            <EntityTypeMapping TypeName="AGENCIAModel.Reservas">
+            <EntityTypeMapping TypeName="AGENCIAModels.Reservas">
               <MappingFragment StoreEntitySet="Reservas">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="alojamiento" ColumnName="alojamiento" />
@@ -735,8 +881,16 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="AGENCIAModels.Roles">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="tiposDocumentos">
-            <EntityTypeMapping TypeName="AGENCIAModel.tiposDocumentos">
+            <EntityTypeMapping TypeName="AGENCIAModels.tiposDocumentos">
               <MappingFragment StoreEntitySet="tiposDocumentos">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -744,7 +898,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tiposHabitaciones">
-            <EntityTypeMapping TypeName="AGENCIAModel.tiposHabitaciones">
+            <EntityTypeMapping TypeName="AGENCIAModels.tiposHabitaciones">
               <MappingFragment StoreEntitySet="tiposHabitaciones">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -752,7 +906,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Ubicacion">
-            <EntityTypeMapping TypeName="AGENCIAModel.Ubicacion">
+            <EntityTypeMapping TypeName="AGENCIAModels.Ubicacion">
               <MappingFragment StoreEntitySet="Ubicacion">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -760,7 +914,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Usuarios">
-            <EntityTypeMapping TypeName="AGENCIAModel.Usuarios">
+            <EntityTypeMapping TypeName="AGENCIAModels.Usuarios">
               <MappingFragment StoreEntitySet="Usuarios">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="tipoDocumento" ColumnName="tipoDocumento" />
@@ -773,6 +927,8 @@
                 <ScalarProperty Name="fechaNacimiento" ColumnName="fechaNacimiento" />
                 <ScalarProperty Name="nombreUsuario" ColumnName="nombreUsuario" />
                 <ScalarProperty Name="clave" ColumnName="clave" />
+                <ScalarProperty Name="rol" ColumnName="rol" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

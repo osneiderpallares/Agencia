@@ -1,0 +1,104 @@
+﻿@model IEnumerable<Agencia.Models.Usuarios>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>    
+    @Html.ActionLink("Crear nuevo", "Create", null, new { @class = "btn btn-primary" })
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Tipo Documento
+                @*@Html.DisplayNameFor(model => model.tiposDocumentos.nombre)*@
+            </th>
+            <th>
+                Número Documento
+                @*@Html.DisplayNameFor(model => model.numeroDocumento)*@
+            </th>
+            <th>
+                Nombres
+                @*@Html.DisplayNameFor(model => model.nombres)*@
+            </th>
+            <th>
+                Apellidos
+                @*@Html.DisplayNameFor(model => model.apellidos)*@
+            </th>
+            <th>
+                Email
+                @*@Html.DisplayNameFor(model => model.email)*@
+            </th>
+            <th>
+                Genero
+                @*@Html.DisplayNameFor(model => model.genero)*@
+            </th>
+            <th>
+                Teléfono
+                @*@Html.DisplayNameFor(model => model.telefono)*@
+            </th>
+            <th>
+                Fecha Nacimiento
+                @*@Html.DisplayNameFor(model => model.fechaNacimiento)*@
+            </th>
+            <th>
+                Usuario
+                @*@Html.DisplayNameFor(model => model.nombreUsuario)*@
+            </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.clave)
+            </th>*@
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.tiposDocumentos.nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.numeroDocumento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombres)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.apellidos)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.genero)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.telefono)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fechaNacimiento)
+                @*@Html.DisplayFor(modelItem => item.fechaNacimiento, new { value = item.fechaNacimiento.ToString("dd/MM/yyyy"), @class = "form-control" })*@
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombreUsuario)
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.clave)
+            </td>*@
+
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.id })
+            </td>
+        </tr>
+
+          }
+    </tbody>
+</table>

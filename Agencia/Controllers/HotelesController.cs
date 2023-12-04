@@ -12,107 +12,112 @@ using Agencia.Permisos;
 namespace Agencia.Controllers
 {
     [ValidateSessionAtribute]
-    public class tiposDocumentosController : Controller
+    public class HotelesController : Controller
     {
         private AGENCIAModel db = new AGENCIAModel();
 
-        // GET: tiposDocumentos
+        // GET: Hoteles
         public ActionResult Index()
         {
-            return View(db.tiposDocumentos.ToList());
+            var hoteles = db.Hoteles.Include(h => h.Estados);
+            return View(hoteles.ToList());
         }
 
-        // GET: tiposDocumentos/Details/5
+        // GET: Hoteles/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            tiposDocumentos tiposDocumentos = db.tiposDocumentos.Find(id);
-            if (tiposDocumentos == null)
+            Hoteles hoteles = db.Hoteles.Find(id);
+            if (hoteles == null)
             {
                 return HttpNotFound();
             }
-            return View(tiposDocumentos);
+            return View(hoteles);
         }
 
-        // GET: tiposDocumentos/Create
+        // GET: Hoteles/Create
         public ActionResult Create()
         {
+            ViewBag.estado = new SelectList(db.Estados, "id", "nombre");
             return View();
         }
 
-        // POST: tiposDocumentos/Create
+        // POST: Hoteles/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,nombre")] tiposDocumentos tiposDocumentos)
+        public ActionResult Create([Bind(Include = "id,nombre,descripcion,direccion,ciudad,telefono,email,estado")] Hoteles hoteles)
         {
             if (ModelState.IsValid)
             {
-                db.tiposDocumentos.Add(tiposDocumentos);
+                db.Hoteles.Add(hoteles);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(tiposDocumentos);
+            ViewBag.estado = new SelectList(db.Estados, "id", "nombre", hoteles.estado);
+            return View(hoteles);
         }
 
-        // GET: tiposDocumentos/Edit/5
+        // GET: Hoteles/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            tiposDocumentos tiposDocumentos = db.tiposDocumentos.Find(id);
-            if (tiposDocumentos == null)
+            Hoteles hoteles = db.Hoteles.Find(id);
+            if (hoteles == null)
             {
                 return HttpNotFound();
             }
-            return View(tiposDocumentos);
+            ViewBag.estado = new SelectList(db.Estados, "id", "nombre", hoteles.estado);
+            return View(hoteles);
         }
 
-        // POST: tiposDocumentos/Edit/5
+        // POST: Hoteles/Edit/5
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,nombre")] tiposDocumentos tiposDocumentos)
+        public ActionResult Edit([Bind(Include = "id,nombre,descripcion,direccion,ciudad,telefono,email,estado")] Hoteles hoteles)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(tiposDocumentos).State = EntityState.Modified;
+                db.Entry(hoteles).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(tiposDocumentos);
+            ViewBag.estado = new SelectList(db.Estados, "id", "nombre", hoteles.estado);
+            return View(hoteles);
         }
 
-        // GET: tiposDocumentos/Delete/5
+        // GET: Hoteles/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            tiposDocumentos tiposDocumentos = db.tiposDocumentos.Find(id);
-            if (tiposDocumentos == null)
+            Hoteles hoteles = db.Hoteles.Find(id);
+            if (hoteles == null)
             {
                 return HttpNotFound();
             }
-            return View(tiposDocumentos);
+            return View(hoteles);
         }
 
-        // POST: tiposDocumentos/Delete/5
+        // POST: Hoteles/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            tiposDocumentos tiposDocumentos = db.tiposDocumentos.Find(id);
-            db.tiposDocumentos.Remove(tiposDocumentos);
+            Hoteles hoteles = db.Hoteles.Find(id);
+            db.Hoteles.Remove(hoteles);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

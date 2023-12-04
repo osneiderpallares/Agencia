@@ -13,10 +13,10 @@ namespace Agencia.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class AGENCIAModels : DbContext
+    public partial class AGENCIAModel : DbContext
     {
-        public AGENCIAModels()
-            : base("name=AGENCIAModels")
+        public AGENCIAModel()
+            : base("name=AGENCIAModel")
         {
         }
     
@@ -28,9 +28,11 @@ namespace Agencia.Models
         public virtual DbSet<Alojamiento> Alojamiento { get; set; }
         public virtual DbSet<contactoEmergencia> contactoEmergencia { get; set; }
         public virtual DbSet<Estados> Estados { get; set; }
+        public virtual DbSet<Generos> Generos { get; set; }
         public virtual DbSet<Habitaciones> Habitaciones { get; set; }
         public virtual DbSet<Hoteles> Hoteles { get; set; }
         public virtual DbSet<Reservas> Reservas { get; set; }
+        public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<tiposDocumentos> tiposDocumentos { get; set; }
         public virtual DbSet<tiposHabitaciones> tiposHabitaciones { get; set; }
         public virtual DbSet<Ubicacion> Ubicacion { get; set; }

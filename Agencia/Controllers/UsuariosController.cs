@@ -7,17 +7,19 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Agencia.Models;
+using Agencia.Permisos;
 
 namespace Agencia.Controllers
 {
+    [ValidateSessionAtribute]
     public class UsuariosController : Controller
     {
-        private AGENCIAModels db = new AGENCIAModels();
+        private AGENCIAModel db = new AGENCIAModel();
 
         // GET: Usuarios
         public ActionResult Index()
         {
-            var usuarios = db.Usuarios.Include(u => u.tiposDocumentos);
+            var usuarios = db.Usuarios.Include(u => u.Generos).Include(u => u.tiposDocumentos);
             return View(usuarios.ToList());
         }
 
@@ -39,6 +41,7 @@ namespace Agencia.Controllers
         // GET: Usuarios/Create
         public ActionResult Create()
         {
+            ViewBag.genero = new SelectList(db.Generos, "id", "nombre");
             ViewBag.tipoDocumento = new SelectList(db.tiposDocumentos, "id", "nombre");
             return View();
         }
@@ -57,6 +60,7 @@ namespace Agencia.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.genero = new SelectList(db.Generos, "id", "nombre", usuarios.genero);
             ViewBag.tipoDocumento = new SelectList(db.tiposDocumentos, "id", "nombre", usuarios.tipoDocumento);
             return View(usuarios);
         }
@@ -73,6 +77,7 @@ namespace Agencia.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.genero = new SelectList(db.Generos, "id", "nombre", usuarios.genero);
             ViewBag.tipoDocumento = new SelectList(db.tiposDocumentos, "id", "nombre", usuarios.tipoDocumento);
             return View(usuarios);
         }
@@ -90,6 +95,7 @@ namespace Agencia.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.genero = new SelectList(db.Generos, "id", "nombre", usuarios.genero);
             ViewBag.tipoDocumento = new SelectList(db.tiposDocumentos, "id", "nombre", usuarios.tipoDocumento);
             return View(usuarios);
         }

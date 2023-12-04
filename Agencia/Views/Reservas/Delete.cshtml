@@ -1,0 +1,57 @@
+﻿@model Agencia.Models.Reservas
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Reservas</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.fecha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fecha)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Alojamiento1.ciudadDestino)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Alojamiento1.ciudadDestino)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.contactoEmergencia1.nombres)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.contactoEmergencia1.nombres)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Estados.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Estados.nombre)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

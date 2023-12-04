@@ -1,0 +1,51 @@
+﻿@model Agencia.Models.Reservas
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Reservas</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.fecha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fecha)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Alojamiento1.ciudadDestino)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Alojamiento1.ciudadDestino)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.contactoEmergencia1.nombres)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.contactoEmergencia1.nombres)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Estados.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Estados.nombre)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

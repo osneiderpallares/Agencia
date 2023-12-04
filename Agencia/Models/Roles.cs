@@ -12,26 +12,17 @@ namespace Agencia.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Estados
+    public partial class Roles
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Estados()
+        public Roles()
         {
-            this.Habitaciones = new HashSet<Habitaciones>();
-            this.Hoteles = new HashSet<Hoteles>();
-            this.Reservas = new HashSet<Reservas>();
             this.Usuarios = new HashSet<Usuarios>();
         }
     
         public int id { get; set; }
         public string nombre { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Habitaciones> Habitaciones { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Hoteles> Hoteles { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Reservas> Reservas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Usuarios> Usuarios { get; set; }
     }

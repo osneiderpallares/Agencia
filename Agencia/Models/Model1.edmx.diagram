@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4c40e7cb7cf0401f8173c863e17899a5" Name="Diagram1">
+        <EntityTypeShape EntityType="AGENCIAModel.Alojamiento" Width="1.5" PointX="7.5" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AGENCIAModel.contactoEmergencia" Width="1.5" PointX="7.5" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AGENCIAModel.Estados" Width="1.5" PointX="0.75" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="AGENCIAModel.Habitaciones" Width="1.5" PointX="5.25" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="AGENCIAModel.Hoteles" Width="1.5" PointX="3" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AGENCIAModel.Reservas" Width="1.5" PointX="9.75" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AGENCIAModel.tiposDocumentos" Width="1.5" PointX="3" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AGENCIAModel.tiposHabitaciones" Width="1.5" PointX="3" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AGENCIAModel.Ubicacion" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AGENCIAModel.Usuarios" Width="1.5" PointX="5.25" PointY="13.25" IsExpanded="true" />
+        <AssociationConnector Association="AGENCIAModel.FK_Alojamiento_Habitaciones" ManuallyRouted="false" />
+        <AssociationConnector Association="AGENCIAModel.FK_Alojamiento_Hoteles" ManuallyRouted="false" />
+        <AssociationConnector Association="AGENCIAModel.FK_Alojamiento_Usuarios" ManuallyRouted="false" />
+        <AssociationConnector Association="AGENCIAModel.FK_Alojamientos_Reservas" ManuallyRouted="false" />
+        <AssociationConnector Association="AGENCIAModel.FK_ContactoEmergencia_Reservas" ManuallyRouted="false" />
+        <AssociationConnector Association="AGENCIAModel.FK_Estados_Habitaciones" ManuallyRouted="false" />
+        <AssociationConnector Association="AGENCIAModel.FK_Estados_Hoteles" ManuallyRouted="false" />
+        <AssociationConnector Association="AGENCIAModel.FK_Estados_Reservas" ManuallyRouted="false" />
+        <AssociationConnector Association="AGENCIAModel.FK_Hoteles_Habitaciones" ManuallyRouted="false" />
+        <AssociationConnector Association="AGENCIAModel.FK_tipoHabitaciones_Habitaciones" ManuallyRouted="false" />
+        <AssociationConnector Association="AGENCIAModel.FK_Ubicacion_Habitaciones" ManuallyRouted="false" />
+        <AssociationConnector Association="AGENCIAModel.FK_tiposDocumentos_Usuarios" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

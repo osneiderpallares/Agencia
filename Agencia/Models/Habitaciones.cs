@@ -14,12 +14,6 @@ namespace Agencia.Models
     
     public partial class Habitaciones
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Habitaciones()
-        {
-            this.Alojamiento = new HashSet<Alojamiento>();
-        }
-    
         public int id { get; set; }
         public Nullable<int> hotel { get; set; }
         public Nullable<int> tipoHabitacion { get; set; }
@@ -31,13 +25,15 @@ namespace Agencia.Models
         public Nullable<int> numeroNiños { get; set; }
         public Nullable<int> totalPersonas { get; set; }
         public Nullable<int> ubicacion { get; set; }
-        public Nullable<int> estado { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Alojamiento> Alojamiento { get; set; }
+        public Nullable<int> estado { get; set; }        
+        public Nullable<System.DateTime> fechaEntrada { get; set; }
+        public Nullable<System.DateTime> fechaSalida { get; set; }
+
         public virtual Estados Estados { get; set; }
         public virtual Hoteles Hoteles { get; set; }
         public virtual tiposHabitaciones tiposHabitaciones { get; set; }
         public virtual Ubicacion Ubicacion1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Reservas> Reservas { get; set; }
     }
 }

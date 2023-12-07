@@ -14,12 +14,13 @@ namespace Agencia.Controllers
     [ValidateSessionAtribute]
     public class UsuariosController : Controller
     {
-        private AGENCIAModel db = new AGENCIAModel();
+        private AGENCIAModelado db = new AGENCIAModelado();
 
         // GET: Usuarios
         public ActionResult Index()
         {
-            var usuarios = db.Usuarios.Include(u => u.Generos).Include(u => u.tiposDocumentos);
+            int usuario =Convert.ToInt32(Session["usuario"]);
+            var usuarios = db.Usuarios.Include(u => u.Generos).Include(u => u.tiposDocumentos).Where(d => d.id != usuario);
             return View(usuarios.ToList());
         }
 
@@ -55,6 +56,8 @@ namespace Agencia.Controllers
         {
             if (ModelState.IsValid)
             {
+                usuarios.estado = 1;
+                usuarios.rol = 2;
                 db.Usuarios.Add(usuarios);
                 db.SaveChanges();
                 return RedirectToAction("Index");

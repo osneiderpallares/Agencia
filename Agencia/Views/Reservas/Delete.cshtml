@@ -13,27 +13,83 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.fecha)
+            @Html.DisplayNameFor(model => model.usuario)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.fecha)
+            @Html.DisplayFor(model => model.usuario)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Alojamiento1.ciudadDestino)
+            @Html.DisplayNameFor(model => model.hotel)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Alojamiento1.ciudadDestino)
+            @Html.DisplayFor(model => model.hotel)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.contactoEmergencia1.nombres)
+            @Html.DisplayNameFor(model => model.habitacion)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.contactoEmergencia1.nombres)
+            @Html.DisplayFor(model => model.habitacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fechaEntrada)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fechaEntrada)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fechaSalida)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fechaSalida)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ciudadDestino)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ciudadDestino)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cantidadPersonas)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cantidadPersonas)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nombreEmergencia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombreEmergencia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.apellidoEmergencia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.apellidoEmergencia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.telefomoEmergencia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.telefomoEmergencia)
         </dd>
 
         <dt>
@@ -49,9 +105,9 @@
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
-        </div>
+<div class="form-actions no-color">
+    <input type="submit" value="Delete" class="btn btn-default" /> |    
+    @Html.ActionLink("Regresar", "../Habitaciones/Index", new { @id_habitacion = @Html.DisplayFor(model => model.habitacion), @id_hotel = @Html.DisplayFor(model => model.hotel) })
+</div>
     }
 </div>

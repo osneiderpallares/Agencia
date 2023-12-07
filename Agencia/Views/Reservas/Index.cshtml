@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Agencia.Models.Reservas>
+﻿@model IEnumerable<Agencia.Models.Reservas>    
 
 @{
     ViewBag.Title = "Index";
@@ -7,22 +7,44 @@
 
 <h2>Index</h2>
 
-<p>
+@*<p>
     @Html.ActionLink("Create New", "Create")
-</p>
+</p>*@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.fecha)
+            @Html.DisplayNameFor(model => model.usuario)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Alojamiento1.ciudadDestino)
+            @Html.DisplayNameFor(model => model.hotel)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.contactoEmergencia1.nombres)
+            @Html.DisplayNameFor(model => model.habitacion)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Estados.nombre)
+            @Html.DisplayNameFor(model => model.fechaEntrada)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fechaSalida)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ciudadDestino)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cantidadPersonas)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nombreEmergencia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.apellidoEmergencia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.telefomoEmergencia)
+        </th>
+        <th>
+            Estado
+            @*@Html.DisplayNameFor(model => model.Estados.nombre)*@
         </th>
         <th></th>
     </tr>
@@ -30,13 +52,37 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.fecha)
+            @ViewBag.nombre_usuario
+            @*@Html.DisplayFor(modelItem => item.usuario)*@
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Alojamiento1.ciudadDestino)
+            @ViewBag.nombre_hotel
+            @*@Html.DisplayFor(modelItem => item.hotel)*@
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.contactoEmergencia1.nombres)
+            @ViewBag.nombre_habitacion
+            @*@Html.DisplayFor(modelItem => item.habitacion)*@
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fechaEntrada)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fechaSalida)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ciudadDestino)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cantidadPersonas)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nombreEmergencia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.apellidoEmergencia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.telefomoEmergencia)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Estados.nombre)

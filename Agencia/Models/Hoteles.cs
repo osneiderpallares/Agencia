@@ -17,7 +17,6 @@ namespace Agencia.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Hoteles()
         {
-            this.Alojamiento = new HashSet<Alojamiento>();
             this.Habitaciones = new HashSet<Habitaciones>();
         }
     
@@ -30,10 +29,11 @@ namespace Agencia.Models
         public string email { get; set; }
         public Nullable<int> estado { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Alojamiento> Alojamiento { get; set; }
         public virtual Estados Estados { get; set; }
+        //public virtual Reservas Reservas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Habitaciones> Habitaciones { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Reservas> Reservas { get; set; }
     }
 }

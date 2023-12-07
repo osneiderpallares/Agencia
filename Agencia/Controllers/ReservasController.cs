@@ -14,12 +14,22 @@ namespace Agencia.Controllers
     [ValidateSessionAtribute]
     public class ReservasController : Controller
     {
-        private AGENCIAModel db = new AGENCIAModel();
+        private AGENCIAModelado db = new AGENCIAModelado();
 
         // GET: Reservas
-        public ActionResult Index()
+        public ActionResult Index(int? id_habitacion, int? id_hotel)
         {
-            var reservas = db.Reservas.Include(r => r.Alojamiento1).Include(r => r.contactoEmergencia1).Include(r => r.Estados);
+            var reservas = db.Reservas.Include(r => r.Estados);
+
+            var usuario = db.Usuarios.Find(Session["usuario"]);
+            ViewBag.nombre_usuario = usuario.nombres + " " + usuario.apellidos;
+
+            var hotel = db.Hoteles.Find(id_hotel);
+            ViewBag.nombre_hotel = hotel.nombre;
+
+            var habitacion = db.Habitaciones.Find(id_habitacion);
+            ViewBag.nombre_habitacion = habitacion.nombre;
+
             return View(reservas.ToList());
         }
 
@@ -35,15 +45,23 @@ namespace Agencia.Controllers
             {
                 return HttpNotFound();
             }
+            var usuario = db.Usuarios.Find(reservas.usuario);
+            var hotel = db.Hoteles.Find(reservas.hotel);
+            var habitacion = db.Habitaciones.Find(reservas.habitacion);
+            ViewBag.nombre_usuario = usuario.nombres + " " + usuario.apellidos;
+            ViewBag.nombre_hotel = hotel.nombre;
+            ViewBag.nombre_habitacion = habitacion.nombre;
             return View(reservas);
         }
 
         // GET: Reservas/Create
-        public ActionResult Create()
+        public ActionResult Create(int id_hotel, int id_habitacion)
         {
-            ViewBag.alojamiento = new SelectList(db.Alojamiento, "id", "ciudadDestino");
-            ViewBag.contactoEmergencia = new SelectList(db.contactoEmergencia, "id", "nombres");
             ViewBag.estado = new SelectList(db.Estados, "id", "nombre");
+            //ViewBag.id_hotel = new SelectList(db.Hoteles, "id", "nombre");
+            //ViewBag.id_habitacion = new SelectList(db.Habitaciones, "id", "nombre");
+            ViewBag.id_hotel = id_hotel;
+            ViewBag.id_habitacion = id_habitacion;
             return View();
         }
 
@@ -52,18 +70,19 @@ namespace Agencia.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,alojamiento,contactoEmergencia,fecha,estado")] Reservas reservas)
+        public ActionResult Create([Bind(Include = "id,usuario,hotel,habitacion,fechaEntrada,fechaSalida,ciudadDestino,cantidadPersonas,nombreEmergencia,apellidoEmergencia,telefomoEmergencia,estado")] Reservas reservas)
         {
             if (ModelState.IsValid)
             {
                 db.Reservas.Add(reservas);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("../Habitaciones/Index");
             }
 
-            ViewBag.alojamiento = new SelectList(db.Alojamiento, "id", "ciudadDestino", reservas.alojamiento);
-            ViewBag.contactoEmergencia = new SelectList(db.contactoEmergencia, "id", "nombres", reservas.contactoEmergencia);
             ViewBag.estado = new SelectList(db.Estados, "id", "nombre", reservas.estado);
+            ViewBag.id_hotel = reservas.hotel;
+            ViewBag.id_habitacion = reservas.habitacion;          
+
             return View(reservas);
         }
 
@@ -79,8 +98,6 @@ namespace Agencia.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.alojamiento = new SelectList(db.Alojamiento, "id", "ciudadDestino", reservas.alojamiento);
-            ViewBag.contactoEmergencia = new SelectList(db.contactoEmergencia, "id", "nombres", reservas.contactoEmergencia);
             ViewBag.estado = new SelectList(db.Estados, "id", "nombre", reservas.estado);
             return View(reservas);
         }
@@ -90,7 +107,7 @@ namespace Agencia.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,alojamiento,contactoEmergencia,fecha,estado")] Reservas reservas)
+        public ActionResult Edit([Bind(Include = "id,usuario,hotel,habitacion,fechaEntrada,fechaSalida,ciudadDestino,cantidadPersonas,nombreEmergencia,apellidoEmergencia,telefomoEmergencia,estado")] Reservas reservas)
         {
             if (ModelState.IsValid)
             {
@@ -98,8 +115,6 @@ namespace Agencia.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.alojamiento = new SelectList(db.Alojamiento, "id", "ciudadDestino", reservas.alojamiento);
-            ViewBag.contactoEmergencia = new SelectList(db.contactoEmergencia, "id", "nombres", reservas.contactoEmergencia);
             ViewBag.estado = new SelectList(db.Estados, "id", "nombre", reservas.estado);
             return View(reservas);
         }
@@ -116,7 +131,7 @@ namespace Agencia.Controllers
             {
                 return HttpNotFound();
             }
-            return View(reservas);
+            return View(reservas);            
         }
 
         // POST: Reservas/Delete/5
@@ -127,7 +142,8 @@ namespace Agencia.Controllers
             Reservas reservas = db.Reservas.Find(id);
             db.Reservas.Remove(reservas);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            //return RedirectToAction("Index");
+            return RedirectToAction("../Habitaciones/index");
         }
 
         protected override void Dispose(bool disposing)
@@ -137,6 +153,6 @@ namespace Agencia.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
+        }       
     }
 }

@@ -5,38 +5,105 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+
 
 <div>
-    <h4>Reservas</h4>
-    <hr />
+    <h4>Detalles de la Reserva</h4>
+    
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.fecha)
+            @Html.DisplayNameFor(model => model.usuario)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.fecha)
+            @ViewBag.nombre_usuario
+            @*@Html.DisplayFor(model => model.usuario)*@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Alojamiento1.ciudadDestino)
+            @Html.DisplayNameFor(model => model.hotel)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Alojamiento1.ciudadDestino)
+            @ViewBag.nombre_hotel
+            @*@Html.DisplayFor(model => model.hotel)*@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.contactoEmergencia1.nombres)
+            @Html.DisplayNameFor(model => model.habitacion)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.contactoEmergencia1.nombres)
+            @ViewBag.nombre_habitacion
+            @*@Html.DisplayFor(model => model.habitacion)*@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Estados.nombre)
+            @Html.DisplayNameFor(model => model.fechaEntrada)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fechaEntrada)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fechaSalida)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fechaSalida)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ciudadDestino)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ciudadDestino)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cantidadPersonas)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cantidadPersonas)
+        </dd>
+    </dl>
+    <hr />
+    <h4>Contacto de emergencia</h4>
+
+    <dl class="dl-horizontal">
+        <dt>
+            Nombres
+            @*@Html.DisplayNameFor(model => model.nombreEmergencia)*@
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombreEmergencia)
+        </dd>
+
+        <dt>
+            Apellidos
+            @*@Html.DisplayNameFor(model => model.apellidoEmergencia)*@
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.apellidoEmergencia)
+        </dd>
+
+        <dt>
+            Telefono deemergencia
+            @*@Html.DisplayNameFor(model => model.telefomoEmergencia)*@
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.telefomoEmergencia)
+        </dd>
+
+        <dt>
+            Estado
+            @*@Html.DisplayNameFor(model => model.Estados.nombre)*@
         </dt>
 
         <dd>
@@ -46,6 +113,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Editar", "Edit", new { id = Model.id }) |    
+    @Html.ActionLink("Regresar", "../Habitaciones/Index", new { @id_habitacion = @Html.DisplayFor(model => model.habitacion), @id_hotel = @Html.DisplayFor(model => model.hotel) })
 </p>

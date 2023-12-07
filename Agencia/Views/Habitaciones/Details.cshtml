@@ -12,7 +12,7 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.nombre)
+            Habitación
         </dt>
 
         <dd>
@@ -20,7 +20,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.descripcion)
+            Descripción
         </dt>
 
         <dd>
@@ -28,7 +28,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.costo)
+            Costo
         </dt>
 
         <dd>
@@ -36,7 +36,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.impuesto)
+            Impuesto
         </dt>
 
         <dd>
@@ -44,7 +44,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.numeroAdultos)
+            Número de Adultos
         </dt>
 
         <dd>
@@ -52,7 +52,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.numeroNiños)
+            Número de Niños/Niñas
         </dt>
 
         <dd>
@@ -60,7 +60,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.totalPersonas)
+            Total Personas
         </dt>
 
         <dd>
@@ -68,15 +68,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Estados.nombre)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Estados.nombre)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Hoteles.nombre)
+            Hotel
         </dt>
 
         <dd>
@@ -84,7 +76,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.tiposHabitaciones.nombre)
+            Habitación
         </dt>
 
         <dd>
@@ -92,17 +84,29 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Ubicacion1.nombre)
+            Ubicación
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Ubicacion1.nombre)
         </dd>
 
+        <dt>
+            Estado
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Estados.nombre)
+        </dd>
+
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
-    @Html.ActionLink("Back to List", "Index") |
-    @Html.ActionLink("Reservar", "../Alojamientoes/Create")
+    @if (Convert.ToInt32(Session["rol"]) == 1)
+    {
+        @Html.ActionLink("Editar", "Edit", new { id = Model.id })
+    }
+    @*@Html.ActionLink("Regresar", "Index") |*@
+    | <a OnClick="javascript: return history.back()" style="cursor:pointer">Regresar</a> |
+    @Html.ActionLink("Reservar", "../Reservas/Create", new { id_habitacion = Model.id, id_hotel = Model.hotel })
 </p>

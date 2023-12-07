@@ -14,12 +14,10 @@ namespace Agencia.Models
     
     public partial class Usuarios
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Usuarios()
-        {
-            this.Alojamiento = new HashSet<Alojamiento>();
+        {           
+            this.Reservas = new HashSet<Reservas>();            
         }
-    
         public int id { get; set; }
         public Nullable<int> tipoDocumento { get; set; }
         public string numeroDocumento { get; set; }
@@ -34,11 +32,13 @@ namespace Agencia.Models
         public Nullable<int> rol { get; set; }
         public Nullable<int> estado { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Alojamiento> Alojamiento { get; set; }
         public virtual Estados Estados { get; set; }
         public virtual Generos Generos { get; set; }
         public virtual Roles Roles { get; set; }
         public virtual tiposDocumentos tiposDocumentos { get; set; }
+        //public virtual Reservas Reservas { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Reservas> Reservas { get; set; }
     }
 }

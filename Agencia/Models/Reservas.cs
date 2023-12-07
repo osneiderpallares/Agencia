@@ -11,17 +11,35 @@ namespace Agencia.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Reservas
-    {
+    {       
         public int id { get; set; }
-        public Nullable<int> alojamiento { get; set; }
-        public Nullable<int> contactoEmergencia { get; set; }
-        public Nullable<System.DateTime> fecha { get; set; }
+        public Nullable<int> usuario { get; set; }
+        public Nullable<int> hotel { get; set; }
+        public Nullable<int> habitacion { get; set; }
+        [Required]
+        public Nullable<System.DateTime> fechaEntrada { get; set; }
+        public Nullable<System.DateTime> fechaSalida { get; set; }
+        [Required]
+        public string ciudadDestino { get; set; }
+        public Nullable<int> cantidadPersonas { get; set; }
+        [Required]
+        public string nombreEmergencia { get; set; }
+        [Required]
+        public string apellidoEmergencia { get; set; }
+        [Required]
+        public string telefomoEmergencia { get; set; }
         public Nullable<int> estado { get; set; }
-    
-        public virtual Alojamiento Alojamiento1 { get; set; }
-        public virtual contactoEmergencia contactoEmergencia1 { get; set; }
+
+        public string nombre_hotel { get; set; }
+        public string nombre_habitacion { get; set; }
+        public string nombre_usuario { get; set; }
+
         public virtual Estados Estados { get; set; }
+        public virtual Hoteles Hoteles { get; set; }        
+        public virtual Usuarios Usuarios { get; set; }
+        public virtual Habitaciones Habitaciones { get; set; }
     }
 }

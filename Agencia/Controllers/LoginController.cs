@@ -10,7 +10,7 @@ namespace Agencia.Controllers
 {
     public class LoginController : Controller
     {
-        private AGENCIAModel db = new AGENCIAModel();        
+        private AGENCIAModelado db = new AGENCIAModelado();        
         // GET: Login
         public ActionResult Index()
         {            
@@ -19,23 +19,36 @@ namespace Agencia.Controllers
         [HttpPost]
         public ActionResult Login(Usuarios usuario)
         {
-            System.Console.Write(usuario);
-            var usuarios = db.Usuarios.Where(c => c.email == usuario.email).Where(d => d.clave == usuario.clave).Count();            
+            if (ModelState.IsValid) {
+                
+                var usuarios = db.Usuarios.Where(c => c.email == usuario.email).Where(d => d.clave == usuario.clave).FirstOrDefault();            
 
-            if (usuarios > 0)
-            {
-                Session["usuario"] = usuarios;
-                return RedirectToAction("Index", "Home");
-                //return View(usuarios);
-            }
-
-            ViewData["mensaje"] = "Usuario no encontrado";
+                if (usuarios != null)
+                {
+                    Session["usuario"] = usuarios.id;
+                    Session["rol"] = usuario.rol;
+                    return RedirectToAction("Index", "Home");
+                    //return View(usuarios);
+                }
+            }            
             return RedirectToAction("Index", "Login");
         }
 
-        public ActionResult Register()
+        public ActionResult Register([Bind(Include = "id,tipoDocumento,numeroDocumento,nombres,apellidos,email,genero,telefono,fechaNacimiento,nombreUsuario,clave,rol")] Usuarios usuarios)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                usuarios.rol = 2;
+                usuarios.estado = 1;
+                db.Usuarios.Add(usuarios);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            ViewBag.roles = new SelectList(db.Roles, "id", "nombre", usuarios.rol);
+            ViewBag.estado = new SelectList(db.Estados, "id", "nombre", usuarios.estado);
+            ViewBag.genero = new SelectList(db.Generos, "id", "nombre", usuarios.genero);
+            ViewBag.tipoDocumento = new SelectList(db.tiposDocumentos, "id", "nombre", usuarios.tipoDocumento);
+            return RedirectToAction("Index", "Login");
         }
 
         public ActionResult CerrarSesion()

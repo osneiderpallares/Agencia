@@ -1,113 +1,189 @@
 ﻿@model IEnumerable<Agencia.Models.Habitaciones>
 
+@using Agencia.Models;
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h3>Reservar</h3>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.descripcion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.costo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.impuesto)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.numeroAdultos)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.numeroNiños)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.totalPersonas)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Estados.nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Hoteles.nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.tiposHabitaciones.nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Ubicacion1.nombre)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+@*<p>
+        @Html.ActionLink("Create New", "Create")
+    </p>*@
+@*<table class="table">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.descripcion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.costo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.impuesto)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.numeroAdultos)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.numeroNiños)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.totalPersonas)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Estados.nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Hoteles.nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.tiposHabitaciones.nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ubicacion1.nombre)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.id })
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.costo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.impuesto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.numeroAdultos)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.numeroNiños)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.totalPersonas)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estados.nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Hoteles.nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.tiposHabitaciones.nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ubicacion1.nombre)
+            </th>
+            <th></th>
         </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.costo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.impuesto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.numeroAdultos)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.numeroNiños)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.totalPersonas)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Estados.nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Hoteles.nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tiposHabitaciones.nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ubicacion1.nombre)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.id })
+                </td>
+            </tr>
+        }
+
+
+
+
+    </table>*@
+
+
+@*<script type="text/javascript">
+    function ShowHide() {
+        var value = document.getElementById('filtro').value;
+        var theControl_SearchString = document.getElementById("SearchString");
+        var theControl_dateString = document.getElementById("dateString");        
+        if (value == "hotel" || value == "ciudad" || value == "totalPersonas") {
+            theControl_SearchString style.display = "block";
+            theControl_dateString.style.display = "none";            
+        }
+        else if (value == "fechaEntrada" || value == "fechaSalida") {
+            theControl_SearchString.style.display = "none";
+            theControl_dateString.style.display = "block";            
+        }            
     }
+</script>*@
 
-
-    @foreach (var item in Model)
-    {
-        <div class="tarjeta">
-            <div class="titulo">@Html.DisplayFor(modelItem => item.Hoteles.nombre)</div>
-            <div class="cuerpo">
-                <img src="https://images.trvl-media.com/lodging/39000000/38710000/38704000/38703955/820d83c5.jpg?impolicy=resizecrop&rw=1200&ra=fit" width="200" alt="muestra">
-                <div>Ciudad: @Html.DisplayFor(modelItem => item.Hoteles.ciudad)</div>
-                <div>Precio: COP @Html.DisplayFor(modelItem => item.costo) por noche</div>
-                <div>Impuestos: @Html.DisplayFor(modelItem => item.impuesto)</div>
+<div class="container">
+    <div class="row">
+        <form asp-controller="Habitaciones" asp-action="Index">
+            <h4>Filtrar por:</h4>
+            <div class="col-lg-4">
+                <select class="form-control" name="filtro" id="filtro">   @*onchange="ShowHide();"*@
+                    <option value="hotel">Hotel</option>
+                    <option value="fechaEntrada">Fecha entrada</option>
+                    <option value="fechaSalida">Fecha salida</option>
+                    <option value="totalPersonas">Cantidad personas</option>
+                    <option value="ciudad">Ciudad</option>
+                </select>
             </div>
-            <div class="pie">
-                @Html.ActionLink("Details", "Details", new { id = item.id })
-                @*<a href="@Html.ActionLink("Mas información", "Details")">Más información</a>*@
+            <div class="col-lg-4">                              
+                <input type="text" class="form-control" id="SearchString" name="SearchString" style="display:block" />
             </div>
-        </div>
-    }
-
-</table>
+            <div class="col-sm-2">
+                <input type="submit" value="Filter" />
+            </div>
+        </form>
+    </div>
+    <br />
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-lg-5">
+                <div class="tarjeta">
+                    <div class="titulo">@Html.DisplayFor(modelItem => item.Hoteles.nombre)</div>
+                    <div class="cuerpo">
+                        <img src="https://images.trvl-media.com/lodging/39000000/38710000/38704000/38703955/820d83c5.jpg?impolicy=resizecrop&rw=1200&ra=fit" width="200" alt="muestra">
+                        <div>Ciudad: @Html.DisplayFor(modelItem => item.Hoteles.ciudad)</div>
+                        <div>Precio: COP @Html.DisplayFor(modelItem => item.costo) por noche</div>
+                        <div>Impuestos: @Html.DisplayFor(modelItem => item.impuesto)</div>
+                    </div>
+                    <div class="pie">
+                        @Html.ActionLink("Detalles/Reservar", "Details", new { id = item.id })
+                        @*<a href="@Html.ActionLink("Mas información", "Details")">Más información</a>*@
+                    </div>
+                </div>
+                <br />
+            </div>
+        }
+    </div>
+    <h3>Reservas históricas</h3>
+    <div class="row">
+        <table class="table">
+            <tr>
+                <th>Usuario</th>
+                <th>Hotel</th>
+                <th>Habitacion</th>
+                <th>Fecha</th>
+                <th>Ciudad Destino</th>
+            </tr>
+            @foreach (ModelNew item in (ModelNew[])ViewBag.reservas)
+            {
+                <tr>
+                    <td>@item.nombre_usuario</td>
+                    <td>@item.nombre_hotel</td>
+                    <td>@item.nombre_habitacion</td>
+                    <td>@item.fechaEntrada</td>
+                    <td>@item.ciudadDestino</td>
+                    <td>
+                        @Html.ActionLink("Editar", "../Reservas/Edit", new { id = @item.id }) |
+                        @Html.ActionLink("Detalles", "../Reservas/Details", new { id = @item.id }) |
+                        @Html.ActionLink("Eliminar", "../Reservas/Delete", new { id = @item.id })
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>

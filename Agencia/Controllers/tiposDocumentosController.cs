@@ -14,7 +14,7 @@ namespace Agencia.Controllers
     [ValidateSessionAtribute]
     public class tiposDocumentosController : Controller
     {
-        private AGENCIAModel db = new AGENCIAModel();
+        private AGENCIAModelado db = new AGENCIAModelado();
 
         // GET: tiposDocumentos
         public ActionResult Index()

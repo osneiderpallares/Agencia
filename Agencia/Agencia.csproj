@@ -128,7 +128,6 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\AlojamientoesController.cs" />
     <Compile Include="Controllers\HabitacionesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HotelesController.cs" />
@@ -138,12 +137,6 @@
     <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Alojamiento.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\contactoEmergencia.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Estados.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -172,10 +165,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\ModelNew.cs" />
     <Compile Include="Models\Reservas.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Roles.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagrams.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tiposDocumentos.cs">
@@ -273,17 +270,13 @@
     <Content Include="Views\Habitaciones\Details.cshtml" />
     <Content Include="Views\Habitaciones\Edit.cshtml" />
     <Content Include="Views\Habitaciones\Index.cshtml" />
+    <Content Include="Views\Login\index.cshtml" />
     <Content Include="Views\Reservas\Create.cshtml" />
     <Content Include="Views\Reservas\Delete.cshtml" />
     <Content Include="Views\Reservas\Details.cshtml" />
     <Content Include="Views\Reservas\Edit.cshtml" />
     <Content Include="Views\Reservas\Index.cshtml" />
-    <Content Include="Views\Alojamientoes\Create.cshtml" />
-    <Content Include="Views\Alojamientoes\Delete.cshtml" />
-    <Content Include="Views\Alojamientoes\Details.cshtml" />
-    <Content Include="Views\Alojamientoes\Edit.cshtml" />
-    <Content Include="Views\Alojamientoes\Index.cshtml" />
-    <Content Include="Views\Login\index.cshtml" />
+    <Content Include="Views\Habitaciones\Lista.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

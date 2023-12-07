@@ -14,7 +14,7 @@ namespace Agencia.Controllers
     [ValidateSessionAtribute]
     public class HotelesController : Controller
     {
-        private AGENCIAModel db = new AGENCIAModel();
+        private AGENCIAModelado db = new AGENCIAModelado();
 
         // GET: Hoteles
         public ActionResult Index()

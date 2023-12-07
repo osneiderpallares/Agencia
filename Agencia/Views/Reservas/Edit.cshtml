@@ -7,7 +7,6 @@
 
 <h2>Edit</h2>
 
-
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -19,26 +18,82 @@
         @Html.HiddenFor(model => model.id)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.alojamiento, "alojamiento", htmlAttributes: new { @class = "control-label col-md-2" })
+            @*@Html.LabelFor(model => model.usuario, htmlAttributes: new { @class = "control-label col-md-2" })*@
             <div class="col-md-10">
-                @Html.DropDownList("alojamiento", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.alojamiento, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.usuario, new { htmlAttributes = new { @class = "form-control", @type = "hidden" } })
+                @Html.ValidationMessageFor(model => model.usuario, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.contactoEmergencia, "contactoEmergencia", htmlAttributes: new { @class = "control-label col-md-2" })
+            @*@Html.LabelFor(model => model.hotel, htmlAttributes: new { @class = "control-label col-md-2" })*@
             <div class="col-md-10">
-                @Html.DropDownList("contactoEmergencia", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.contactoEmergencia, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.hotel, new { htmlAttributes = new { @class = "form-control", @type = "hidden" } })
+                @Html.ValidationMessageFor(model => model.hotel, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.fecha, htmlAttributes: new { @class = "control-label col-md-2" })
+            @*@Html.LabelFor(model => model.habitacion, htmlAttributes: new { @class = "control-label col-md-2" })*@
             <div class="col-md-10">
-                @Html.EditorFor(model => model.fecha, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.fecha, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.habitacion, new { htmlAttributes = new { @class = "form-control", @type = "hidden" } })
+                @Html.ValidationMessageFor(model => model.habitacion, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.fechaEntrada, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.fechaEntrada, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.fechaEntrada, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.fechaSalida, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.fechaSalida, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.fechaSalida, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ciudadDestino, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ciudadDestino, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ciudadDestino, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.cantidadPersonas, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.cantidadPersonas, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.cantidadPersonas, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.nombreEmergencia, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.nombreEmergencia, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.nombreEmergencia, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.apellidoEmergencia, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.apellidoEmergencia, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.apellidoEmergencia, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.telefomoEmergencia, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.telefomoEmergencia, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.telefomoEmergencia, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -58,10 +113,6 @@
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+<div>    
+    @Html.ActionLink("Regresar", "../Habitaciones/Index", new { @id_habitacion = @Html.DisplayFor(model => model.habitacion), @id_hotel = @Html.DisplayFor(model => model.hotel) })
 </div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}

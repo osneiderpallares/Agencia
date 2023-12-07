@@ -25,10 +25,13 @@
                     <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
                     <li>@Html.ActionLink("Acerca de", "About", "Home")</li>
                     <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Usuarios", "index", "Usuarios")</li>
-                    @*<li>@Html.ActionLink("Hoteles", "index", "Hoteles")</li>*@
-                    <li>@Html.ActionLink("Hoteles", "index", "Habitaciones")</li>
-                    <li>@Html.ActionLink("Reservas", "index", "Reservas")</li>
+                    <li>@Html.ActionLink("Reservas", "Index", "Habitaciones")</li>
+                    @if (Convert.ToInt32(Session["rol"]) == 1)
+                    {                    
+                        <li>@Html.ActionLink("Usuarios", "Index", "Usuarios")</li>
+                        <li>@Html.ActionLink("Hoteles", "Index", "Hoteles")</li>
+                        <li>@Html.ActionLink("Habitaciones", "Lista", "Habitaciones")</li>
+                    }
                     <li>@Html.ActionLink("Salir", "CerrarSesion", "Login")</li>
                 </ul>
             </div>
